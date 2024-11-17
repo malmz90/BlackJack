@@ -1,5 +1,13 @@
 # BlackJack
 
-![Main Menu](.images/main-menu.png)
-![Game Screen](.images/game-screen.png)
-![Results Screen](.images/results-screen.png)
+## Main Menu Screen
+
+![Main Menu](images/main-menu.png)
+
+## Game Screen
+
+![Game Screen](images/game-screen.png)
+
+## Results Screen
+
+![Results Screen](images/results-screen.png)
