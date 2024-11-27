@@ -1,27 +1,23 @@
 package com.example.blackjack_app
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Find the newGameButton
         val newGameButton = findViewById<Button>(R.id.newGameButton)
-        val rulesButton = findViewById<Button>(R.id.rulesButton)
 
+        // Set click listener
         newGameButton.setOnClickListener {
-            Toast.makeText(this, "Starting new game...", Toast.LENGTH_SHORT).show()
-        }
-
-        rulesButton.setOnClickListener {
-            Toast.makeText(this, "Opening rules...", Toast.LENGTH_SHORT).show()
+            // Create intent to open GameActivity
+            val intent = Intent(this, GameActivity::class.java)
+            startActivity(intent)
         }
     }
 }
