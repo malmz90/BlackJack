@@ -10,12 +10,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Find the newGameButton
         val newGameButton = findViewById<Button>(R.id.newGameButton)
 
-        // Set click listener
         newGameButton.setOnClickListener {
-            // Create intent to open GameActivity
             val intent = Intent(this, GameActivity::class.java)
             startActivity(intent)
         }
