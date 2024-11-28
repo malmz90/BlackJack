@@ -7,6 +7,15 @@
 
     <!-- Cards Area -->
     <TextView
+        android:id="@+id/dealerCards"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/dealerScore"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+    <TextView
         android:id="@+id/dealerScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,6 +26,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="32dp"/>
 
+
+    <TextView
+        android:id="@+id/playerCards"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/buttonContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="16dp"/>
     <TextView
         android:id="@+id/playerScore"
         android:layout_width="wrap_content"

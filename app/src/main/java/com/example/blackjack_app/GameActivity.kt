@@ -1,7 +1,9 @@
 package com.example.blackjack_app
 
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class GameActivity : AppCompatActivity() {
@@ -13,9 +15,55 @@ class GameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
+        setupButtons()
         startNewGame()
     }
 
+    private fun setupButtons() {
+        findViewById<Button>(R.id.hitButton).setOnClickListener {
+            playerHit()
+        }
+
+        findViewById<Button>(R.id.standButton).setOnClickListener {
+            playerStand()
+        }
+    }
+
+    private fun playerHit() {
+        playerHand.add(deck.drawCard())
+
+        if (calculateScore(playerHand) > 21) {
+            endGame("Bust! Dealer wins!")
+        }
+
+        updateUI()
+    }
+
+    private fun playerStand() {
+        while (calculateScore(dealerHand) < 17) {
+            dealerHand.add(deck.drawCard())
+        }
+
+        val playerScore = calculateScore(playerHand)
+        val dealerScore = calculateScore(dealerHand)
+
+        val result = when {
+            dealerScore > 21 -> "Dealer busts! You win!"
+            playerScore > dealerScore -> "You win!"
+            playerScore < dealerScore -> "Dealer wins!"
+            else -> "Push (Tie)!"
+        }
+
+        endGame(result)
+    }
+
+    private fun endGame(result: String) {
+        findViewById<Button>(R.id.hitButton).isEnabled = false
+        findViewById<Button>(R.id.standButton).isEnabled = false
+
+        Toast.makeText(this, result, Toast.LENGTH_LONG).show()
+
+    }
     private fun startNewGame() {
         playerHand.clear()
         dealerHand.clear()
@@ -29,11 +77,13 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun updateUI() {
-        findViewById<TextView>(R.id.dealerScore).text =
-            "Dealer: ${calculateScore(dealerHand)}"
+        findViewById<TextView>(R.id.dealerCards).text =
+            "Cards: ${dealerHand.joinToString(", ")}\n" +
+                    "Total: ${calculateScore(dealerHand)}"
 
-        findViewById<TextView>(R.id.playerScore).text =
-            "Player: ${calculateScore(playerHand)}"
+        findViewById<TextView>(R.id.playerCards).text =
+            "Cards: ${playerHand.joinToString(", ")}\n" +
+                    "Total: ${calculateScore(playerHand)}"
     }
 
     private fun calculateScore(hand: List<Card>): Int {
