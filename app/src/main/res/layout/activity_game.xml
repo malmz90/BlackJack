@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Cards Area -->
     <TextView
         android:id="@+id/dealerCards"
         android:layout_width="wrap_content"
@@ -33,7 +32,54 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/resultPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/dealerCards"
+        app:layout_constraintBottom_toTopOf="@id/playerCards">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/resultText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="24dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/playAgainButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Play Again"
+                    android:layout_marginEnd="8dp"/>
+
+                <Button
+                    android:id="@+id/mainMenuButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Main Menu"
+                    android:layout_marginStart="8dp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/playerCards"
@@ -63,7 +109,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- Bottom Button Container -->
     <LinearLayout
         android:id="@+id/buttonContainer"
         android:layout_width="match_parent"

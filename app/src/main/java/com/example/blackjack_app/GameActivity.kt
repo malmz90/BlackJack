@@ -1,10 +1,12 @@
 package com.example.blackjack_app
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 
 class GameActivity : AppCompatActivity() {
     private val deck = Deck()
@@ -58,11 +60,26 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun endGame(result: String) {
+
         findViewById<Button>(R.id.hitButton).isEnabled = false
         findViewById<Button>(R.id.standButton).isEnabled = false
 
-        Toast.makeText(this, result, Toast.LENGTH_LONG).show()
 
+        val resultPanel = findViewById<CardView>(R.id.resultPanel)
+        resultPanel.visibility = View.VISIBLE
+
+
+        findViewById<TextView>(R.id.resultText).text = result
+
+
+        findViewById<Button>(R.id.playAgainButton).setOnClickListener {
+            resultPanel.visibility = View.GONE
+            startNewGame()
+        }
+
+        findViewById<Button>(R.id.mainMenuButton).setOnClickListener {
+            finish()
+        }
     }
     private fun startNewGame() {
         playerHand.clear()
@@ -72,6 +89,11 @@ class GameActivity : AppCompatActivity() {
         playerHand.add(deck.drawCard())
         dealerHand.add(deck.drawCard())
         playerHand.add(deck.drawCard())
+
+        findViewById<Button>(R.id.hitButton).isEnabled = true
+        findViewById<Button>(R.id.standButton).isEnabled = true
+
+        findViewById<CardView>(R.id.resultPanel).visibility = View.GONE
 
         updateUI()
     }
