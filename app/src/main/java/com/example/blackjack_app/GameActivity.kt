@@ -43,7 +43,7 @@ class GameActivity : AppCompatActivity() {
         while (calculateScore(dealerHand) < 17) {
             dealerHand.add(deck.drawCard())
         }
-
+        updateUI()
         val playerScore = calculateScore(playerHand)
         val dealerScore = calculateScore(dealerHand)
 
