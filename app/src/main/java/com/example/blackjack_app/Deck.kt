@@ -1,6 +1,5 @@
 package com.example.blackjack_app
 
-// Deck.kt
 class Deck {
     fun drawCard(): Card {
         val randomSuit = Card.Suit.values().random()

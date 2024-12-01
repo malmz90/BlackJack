@@ -1,10 +1,12 @@
 package com.example.blackjack_app
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 
@@ -17,19 +19,25 @@ class GameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
-        setupButtons()
+
+            findViewById<Button>(R.id.hitButton).setOnClickListener {
+                playerHit()
+            }
+
+            findViewById<Button>(R.id.standButton).setOnClickListener {
+                playerStand()
+            }
+
         startNewGame()
     }
 
-    private fun setupButtons() {
-        findViewById<Button>(R.id.hitButton).setOnClickListener {
-            playerHit()
-        }
-
-        findViewById<Button>(R.id.standButton).setOnClickListener {
-            playerStand()
-        }
+    /*
+    private fun getCardImageResource(card: Card): Int {
+        val cardName = "${card.rank.name.lowercase()}_of_${card.suit.name.lowercase()}"
+        return resources.getIdentifier(cardName, "drawable", packageName)
     }
+    */
+
 
     private fun playerHit() {
         playerHand.add(deck.drawCard())
@@ -99,14 +107,35 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun updateUI() {
-        findViewById<TextView>(R.id.dealerCards).text =
-            "Cards: ${dealerHand.joinToString(", ")}\n" +
-                    "Total: ${calculateScore(dealerHand)}"
+        val playerCardLayout = findViewById<LinearLayout>(R.id.playerCards)
+        playerCardLayout.removeAllViews()
 
-        findViewById<TextView>(R.id.playerCards).text =
-            "Cards: ${playerHand.joinToString(", ")}\n" +
-                    "Total: ${calculateScore(playerHand)}"
+        for (card in playerHand) {
+            val imageView = ImageView(this)
+            imageView.setImageResource(card.getImageResource())
+            imageView.layoutParams = LinearLayout.LayoutParams(300, 400)
+            (imageView.layoutParams as LinearLayout.LayoutParams).marginEnd = 16
+            playerCardLayout.addView(imageView)
+        }
+
+        val dealerCardLayout = findViewById<LinearLayout>(R.id.dealerCards)
+        dealerCardLayout.removeAllViews()
+
+        for (card in dealerHand) {
+            val imageView = ImageView(this)
+            imageView.setImageResource(card.getImageResource())
+            imageView.layoutParams = LinearLayout.LayoutParams(300, 400)
+            (imageView.layoutParams as LinearLayout.LayoutParams).marginEnd = 16
+            dealerCardLayout.addView(imageView)
+        }
+
+        findViewById<TextView>(R.id.playerScore).text =
+            "Total: ${calculateScore(playerHand)}"
+
+        findViewById<TextView>(R.id.dealerScore).text =
+            "Total: ${calculateScore(dealerHand)}"
     }
+
 
     private fun calculateScore(hand: List<Card>): Int {
         var score = 0
