@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">Blackjack_app</string>
+
+    <string name="rules_text">
+    Objective:\n
+    • Get closer to 21 than the dealer without going over\n
+    • If you go over 21, you "bust" and lose\n\n
+
+    Card Values:\n
+    • Number cards (2-10): Face value\n
+    • Face cards (Jack, Queen, King): 10\n
+    • Ace: 11 or 1 (automatically adjusted to help you)\n\n
+
+    Gameplay:\n
+    1. You and the dealer each get 2 cards\n
+    2. Your options:\n
+       • Hit: Take another card\n
+       • Stand: Keep your current hand\n
+    3. Dealer must hit on 16 or below and stand on 17 or above\n\n
+
+    Winning:\n
+    • Get closer to 21 than the dealer\n
+    • Dealer busts (goes over 21)\n
+    • Push (tie) if you and dealer have same total
+</string>
 </resources>

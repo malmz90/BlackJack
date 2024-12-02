@@ -31,12 +31,22 @@ class GameActivity : AppCompatActivity() {
         startNewGame()
     }
 
-    /*
-    private fun getCardImageResource(card: Card): Int {
-        val cardName = "${card.rank.name.lowercase()}_of_${card.suit.name.lowercase()}"
-        return resources.getIdentifier(cardName, "drawable", packageName)
+    private fun startNewGame() {
+        playerHand.clear()
+        dealerHand.clear()
+
+        dealerHand.add(deck.drawCard())
+        playerHand.add(deck.drawCard())
+        dealerHand.add(deck.drawCard())
+        playerHand.add(deck.drawCard())
+
+        findViewById<Button>(R.id.hitButton).isEnabled = true
+        findViewById<Button>(R.id.standButton).isEnabled = true
+
+        findViewById<CardView>(R.id.resultPanel).visibility = View.GONE
+
+        updateUI()
     }
-    */
 
 
     private fun playerHit() {
@@ -89,22 +99,7 @@ class GameActivity : AppCompatActivity() {
             finish()
         }
     }
-    private fun startNewGame() {
-        playerHand.clear()
-        dealerHand.clear()
 
-        dealerHand.add(deck.drawCard())
-        playerHand.add(deck.drawCard())
-        dealerHand.add(deck.drawCard())
-        playerHand.add(deck.drawCard())
-
-        findViewById<Button>(R.id.hitButton).isEnabled = true
-        findViewById<Button>(R.id.standButton).isEnabled = true
-
-        findViewById<CardView>(R.id.resultPanel).visibility = View.GONE
-
-        updateUI()
-    }
 
     private fun updateUI() {
         val playerCardLayout = findViewById<LinearLayout>(R.id.playerCards)
@@ -114,7 +109,6 @@ class GameActivity : AppCompatActivity() {
             val imageView = ImageView(this)
             imageView.setImageResource(card.getImageResource())
             imageView.layoutParams = LinearLayout.LayoutParams(300, 400)
-            (imageView.layoutParams as LinearLayout.LayoutParams).marginEnd = 16
             playerCardLayout.addView(imageView)
         }
 
@@ -125,7 +119,6 @@ class GameActivity : AppCompatActivity() {
             val imageView = ImageView(this)
             imageView.setImageResource(card.getImageResource())
             imageView.layoutParams = LinearLayout.LayoutParams(300, 400)
-            (imageView.layoutParams as LinearLayout.LayoutParams).marginEnd = 16
             dealerCardLayout.addView(imageView)
         }
 

@@ -11,9 +11,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val newGameButton = findViewById<Button>(R.id.newGameButton)
+        val rulesButton = findViewById<Button>(R.id.rulesButton)
 
         newGameButton.setOnClickListener {
             val intent = Intent(this, GameActivity::class.java)
+            startActivity(intent)
+        }
+
+        rulesButton.setOnClickListener {
+            val intent = Intent(this, RulesActivity::class.java)
             startActivity(intent)
         }
     }
