@@ -105,10 +105,13 @@ class GameActivity : AppCompatActivity() {
         val playerCardLayout = findViewById<LinearLayout>(R.id.playerCards)
         playerCardLayout.removeAllViews()
 
+        val cardWidth = if (playerHand.size > 3) 200 else 300
+        val cardHeight = if (playerHand.size > 3) 300 else 400
+
         for (card in playerHand) {
             val imageView = ImageView(this)
             imageView.setImageResource(card.getImageResource())
-            imageView.layoutParams = LinearLayout.LayoutParams(300, 400)
+            imageView.layoutParams = LinearLayout.LayoutParams(cardWidth, cardHeight)
             playerCardLayout.addView(imageView)
         }
 
@@ -118,16 +121,16 @@ class GameActivity : AppCompatActivity() {
         for (card in dealerHand) {
             val imageView = ImageView(this)
             imageView.setImageResource(card.getImageResource())
-            imageView.layoutParams = LinearLayout.LayoutParams(300, 400)
+            imageView.layoutParams = LinearLayout.LayoutParams(cardWidth, cardHeight)
             dealerCardLayout.addView(imageView)
         }
 
         findViewById<TextView>(R.id.playerScore).text =
             "Total: ${calculateScore(playerHand)}"
-
         findViewById<TextView>(R.id.dealerScore).text =
             "Total: ${calculateScore(dealerHand)}"
     }
+
 
 
     private fun calculateScore(hand: List<Card>): Int {
