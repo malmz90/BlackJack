@@ -144,10 +144,10 @@ class GameActivity : AppCompatActivity() {
         }
 
         findViewById<TextView>(R.id.playerScore).text =
-            "Total: ${calculateScore(playerHand)}"
+            "Player: ${calculateScore(playerHand)}"
 
         findViewById<TextView>(R.id.dealerScore).text =
-            "Total: ${calculateScore(dealerHand)}"
+            "Dealer: ${calculateScore(dealerHand)}"
     }
 
     private fun calculateScore(hand: List<Card>): Int {
