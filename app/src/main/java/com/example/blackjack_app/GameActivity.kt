@@ -94,7 +94,7 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun updateChipStack() {
-        findViewById<TextView>(R.id.chipStack).text = "Chips: $chips"
+        findViewById<TextView>(R.id.chipStack).text = "Chips: $chips | Bet: $betAmount"
     }
 
 
@@ -122,8 +122,10 @@ class GameActivity : AppCompatActivity() {
     private fun updateUI() {
         val playerCardLayout = findViewById<LinearLayout>(R.id.playerCards)
         playerCardLayout.removeAllViews()
+
         val cardWidth = if (playerHand.size > 3) 200 else 300
         val cardHeight = if (playerHand.size > 3) 300 else 400
+
         for (card in playerHand) {
             val imageView = ImageView(this)
             imageView.setImageResource(card.getImageResource())

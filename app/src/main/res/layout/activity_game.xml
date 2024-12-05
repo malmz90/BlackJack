@@ -83,7 +83,7 @@
         android:id="@+id/chipStack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Chips: 500"
+        android:text="Chips: 500 | Bet: 50"
         android:textSize="24sp"
         android:layout_marginBottom="8dp"
         android:textStyle="bold"
