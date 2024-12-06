@@ -27,6 +27,8 @@
         <activity
             android:name=".RulesActivity"
             android:exported="false"/>
+        <activity android:name=".StatisticsActivity" />
+
     </application>
 
 </manifest>

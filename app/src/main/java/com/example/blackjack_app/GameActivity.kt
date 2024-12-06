@@ -1,6 +1,5 @@
 package com.example.blackjack_app
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -16,10 +15,14 @@ class GameActivity : AppCompatActivity() {
     private val dealerHand = mutableListOf<Card>()
     private var chips = 500
     private val betAmount = 50
+    private lateinit var statsManager: StatisticsManager
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
+
+        statsManager = StatisticsManager(this)
 
         findViewById<Button>(R.id.hitButton).setOnClickListener {
             playerHit()
@@ -43,7 +46,6 @@ class GameActivity : AppCompatActivity() {
 
         dealerHand.add(deck.drawCard())
         playerHand.add(deck.drawCard())
-        dealerHand.add(deck.drawCard())
         playerHand.add(deck.drawCard())
 
         findViewById<Button>(R.id.hitButton).isEnabled = true
@@ -109,6 +111,13 @@ class GameActivity : AppCompatActivity() {
 
         updateChipStack()
 
+        statsManager.incrementGamesPlayed()
+        when {
+            result.contains("You win!") -> statsManager.incrementGamesWon()
+            result.contains("Dealer wins!") || result.contains("Bust!") -> statsManager.incrementGamesLost()
+        }
+        statsManager.updateHighestChips(chips)
+
         findViewById<Button>(R.id.playAgainButton).setOnClickListener {
             resultPanel.visibility = View.GONE
             startNewGame()
@@ -118,6 +127,7 @@ class GameActivity : AppCompatActivity() {
             finish()
         }
     }
+
 
     private fun updateUI() {
         val playerCardLayout = findViewById<LinearLayout>(R.id.playerCards)
