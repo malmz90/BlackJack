@@ -18,7 +18,7 @@ data class Card(val suit: Suit, val rank: Rank) {
             NINE -> 9
             TEN -> 10
             JACK, QUEEN, KING -> 10
-            ACE -> 11
+            ACE -> 14
         }
     }
 
